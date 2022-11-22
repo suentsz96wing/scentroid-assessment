@@ -13,6 +13,11 @@ Click the TimeZone to open the dropdown to change the timezone, the time will ch
 
 ReactJS, Typescript, MUI, Antd, Dayjs, Apexcharts
 
+## Further work / exists problem
+Apexchart library has conflict with Jest/test-library
+No effect when change timezone
+Implement trendline
+
 ## Available Scripts
 
 In the project directory, you can run:
