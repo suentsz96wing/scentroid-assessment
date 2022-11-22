@@ -1,25 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Typography } from "@mui/material";
+import DateTimePickerInput from "./components/DateTimePickerInput";
+import { StockChart } from "./components/StockChart";
+import { useDatePeriodFilter } from "./hooks/useDatePeriodFilter";
+import TimeZoneInput from "./components/TimeZoneInput";
 
 function App() {
+  const dateMethods = useDatePeriodFilter();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      style={{ minHeight: "100vh" }}
+    >
+      <Grid>
+        <Typography fontSize={26}>TSLA STOCK</Typography>
+      </Grid>
+      <Grid container justifyContent="center" marginY={2} alignItems="center">
+        <Grid>
+          <DateTimePickerInput
+            data-testid="startDate"
+            label="Start Date"
+            date={dateMethods.startDate}
+            timezone={dateMethods.timezone}
+            onChange={dateMethods.handleStartDateChange}
+          />
+        </Grid>
+        <Grid>
+          <DateTimePickerInput
+            label="End Date"
+            date={dateMethods.endDate}
+            timezone={dateMethods.timezone}
+            onChange={dateMethods.handleEndDateChange}
+          />
+        </Grid>
+        <Grid>
+          <TimeZoneInput
+            value={dateMethods.timezone}
+            onChange={dateMethods.handleTimezoneChange}
+          />
+        </Grid>
+      </Grid>
+      <Grid>
+        <StockChart
+          startTime={dateMethods.startDate}
+          endTime={dateMethods.endDate}
+        />
+      </Grid>
+    </Grid>
   );
 }
 
